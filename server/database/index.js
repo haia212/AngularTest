@@ -4,6 +4,7 @@
 var mongoose = require('mongoose');
 
 var UserModel = require('./schemas/users');
+var CollocModel = require('./schemas/collocs');
 
 // Connections
 var developmentDb = 'mongodb://localhost/test';
@@ -37,3 +38,4 @@ db.once('open', function callback () {
 });
 
 exports.users = UserModel;
+exports.collocs = CollocModel;

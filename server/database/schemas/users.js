@@ -43,10 +43,10 @@ userSchema.pre('save', function (next) {
 });
 
 // Password verification helper
-userSchema.methods.comparePassword = function (triedPassword, cb) {
+userSchema.methods.validPassword = function (triedPassword) {
     bcrypt.compare(triedPassword, this.password, function(err, isMatch) {
-        if(err) return cb(err);
-        cb(null, isMatch);
+        if(err) return false;
+        return isMatch;
     });
 };
 
