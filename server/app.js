@@ -1,37 +1,120 @@
 
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
+// call the packages we need
+var express    = require('express');        // call express
+var app        = express();                 // define our app using express
+var path       = require('path');
 var bodyParser = require('body-parser');
-var passport = require('passport');
-var session      = require('express-session');
 
-var app = express();
-
-require('./config/passport')(passport); // pass passport for configuration
-
-
-// uncomment after placing your favicon in /public
-//app.use(favicon(__dirname + '/public/favicon.ico'));
-app.use(logger('dev'));
+// configure app to use bodyParser()
+// this will let us get the data from a POST
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
 
+var port = process.env.PORT || 8080;        // set our port
 
-// required for passport
-app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
-app.use(passport.initialize());
-app.use(passport.session()); // persistent login sessions
-
+// ROUTES FOR OUR API
+// =============================================================================
+//var router = express.Router();              // get an instance of the express Router
 
 /**
  * Routes
  */
-var router = require('./router')(app, passport);
+var router = express.Router(); 
 
+
+// // middleware to use for all requests
+// router.use(function(req, res, next) {
+//     // do logging
+//     console.log('Something is happening.');
+//     next(); // make sure we go to the next routes and don't stop here
+// });
+
+// test route to make sure everything is working (accessed at GET http://localhost:8080/api)
+router.get('/', function(req, res) {
+    res.json({ message: 'hooray! welcome to our api!' });   
+});
+
+// on routes that end in /colloc
+// ----------------------------------------------------
+router.route('/collocs')
+
+    // create a bear (accessed at POST http://localhost:8080/api/colloc)
+    .post(function(req, res) {
+        
+        var colloc = new Colloc();      // create a new instance of the Bear model
+        colloc.name = req.body.name;  // set the colloc name (comes from the request)
+
+        // save the bear and check for errors
+        colloc.save(function(err) {
+            if (err) {
+                res.send(err);
+            }
+
+            res.json({ message: 'Colloc created!' });
+        });
+        
+    })
+
+     // get all the bears (accessed at GET http://localhost:8080/api/bears)
+    .get(function(req, res) {
+        Colloc.find(function(err, collocs) {
+            if (err)
+                res.send(err);
+
+            res.json(collocs);
+        });
+    });
+router.route('/collocs/:colloc_id')
+
+    // get the bear with that id (accessed at GET http://localhost:8080/api/bears/:bear_id)
+    .get(function(req, res) {
+        Colloc.findById(req.params.colloc_id, function(err, colloc) {
+            if (err)
+                res.send(err);
+            res.json(colloc);
+        });
+    })
+
+    // update the bear with this id (accessed at PUT http://localhost:8080/api/bears/:bear_id)
+    .put(function(req, res) {
+
+        // use our bear model to find the bear we want
+        Colloc.findById(req.params.colloc_id, function(err, colloc) {
+
+            if (err)
+                res.send(err);
+
+            colloc.name = req.body.name;  // update the bears info
+
+            // save the bear
+            colloc.save(function(err) {
+                if (err)
+                    res.send(err);
+
+                res.json({ message: 'Colloc updated!' });
+            });
+
+        });
+    })
+     // delete the bear with this id (accessed at DELETE http://localhost:8080/api/bears/:bear_id)
+    .delete(function(req, res) {
+        Colloc.remove({
+            _id: req.params.colloc_id
+        }, function(err, colloc) {
+            if (err)
+                res.send(err);
+
+            res.json({ message: 'Successfully deleted' });
+        });
+    });
+
+
+// REGISTER OUR ROUTES -------------------------------
+// all of our routes will be prefixed with /api
+app.use('/api', router);
+
+var db = require('./database');
+var Colloc = db.collocs;
 
 
 /**
