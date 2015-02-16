@@ -1,28 +1,20 @@
+var express = require('express');
+var router = express.Router();
+
+
+var colloc = require('./routes/colloc');
+
 /**
  * The Index of Routes
  */
 
-module.exports = function (app, passport) {
+module.exports = function (app) {
 
-    // app.use('/api', require('./routes/home'));
-
-    // // The signup route
-    // app.use('/api/signup', require('./routes/signup'));
-    // app.use('/api/login', require('./routes/login'));
-    // app.use('/api/profile', auth, require('./routes/profile'));
-
-    // app.get('/api/logout', function(req, res) {
-    //     req.logout();
-    //     res.redirect('/');
-    // });
-
-    // // The API route
-    // app.use('/api/colloc', auth, require('./routes/colloc'));
-
-
-
-    // The signup route
-    app.use('/signup', require('./routes/signup'));
+    app.get('/api/colloc', colloc.list);
+    app.post('/api/colloc', colloc.add);
+    app.get('/api/colloc/:colloc_id', colloc.get);
+    app.put('/api/colloc/:colloc_id', colloc.update);
+    app.delete('/api/colloc/:colloc_id', colloc.delete);
 
 }
 

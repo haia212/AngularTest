@@ -1,41 +1,67 @@
 /**
  * This handles the signing in of users
  */
-var express = require('express');
-var router = express.Router();
+//var express = require('express');
+//var router = express.Router();
+
+
 var db = require('../../database');
+var Colloc = db.collocs;
 
+exports.add = function(req, res){
+    var colloc = new Colloc();      // create a new instance of the Bear model
+    colloc.name = req.body.name;  // set the colloc name (comes from the request)
 
-var Collocs = db.collocs;
-
-
-/**
- * Redirections for /colloc
-**/
-router.post('/', function (req, res) {
-    res.status(201).json({
-        req : req
-    });
-});
-
-
-/**
- * Redirections for /colloc/add
-**/
-router.post('/add/', function (req, res) {
-    // Create a new instance of the Beer model
-    var colloc = new Colloc();
-
-    // Set the colloc properties that came from the POST data
-    colloc.name = req.body.name;
-
-    // Save the colloc and check for errors
+    // save the bear and check for errors
     colloc.save(function(err) {
-        if (err)
-          res.send(err);
+        if (err) {
+            res.send(err);
+        }
 
-        res.json({ message: 'Colloc added', data: colloc });
+        res.json({ message: 'Colloc created!' });
     });
-});
+};
 
-module.exports = router;
+exports.list = function(req, res) {
+    Colloc.find(function(err, collocs) {
+
+        if (err)
+            res.send(err);
+
+        res.json(collocs);
+    });
+};
+
+exports.get = function(req, res) {
+    Colloc.findById(req.params.colloc_id, function(err, colloc) {
+        if (err)
+            res.send(err);
+        res.json(colloc);
+    });
+};
+exports.update = function(req, res) {
+    Colloc.findById(req.params.colloc_id, function(err, colloc) {
+
+        if (err)
+            res.send(err);
+
+        colloc.name = req.body.name;  
+        colloc.save(function(err) {
+            if (err)
+                res.send(err);
+
+            res.json({ message: 'Colloc updated!' });
+        });
+
+    });
+};
+exports.delete = function(req, res) {
+    Colloc.remove({
+        _id: req.params.colloc_id
+    }, function(err, colloc) {
+        if (err)
+            res.send(err);
+
+        res.json({ message: 'Successfully deleted' });
+    });
+};
