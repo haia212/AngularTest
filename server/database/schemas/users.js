@@ -7,8 +7,6 @@ var Schema = mongoose.Schema;
 
 // Define the User Schema
 var userSchema = new Schema({
-    firstname: { type: String, required: true },
-    lastname: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     profile: {} // for extra information you may / may not want
@@ -43,14 +41,13 @@ userSchema.pre('save', function (next) {
 });
 
 // Password verification helper
-userSchema.methods.validPassword = function (triedPassword) {
-    bcrypt.compare(triedPassword, this.password, function(err, isMatch) {
-        if(err) return false;
-        return isMatch;
-    });
+userSchema.methods.verifyPassword = function(password, cb) {
+  bcrypt.compare(password, this.password, function(err, isMatch) {
+    if (err) return cb(err);
+    cb(null, isMatch);
+  });
 };
 
 // The primary user model
 var User = mongoose.model('User', userSchema);
-
 module.exports = User;

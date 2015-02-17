@@ -1,14 +1,18 @@
 
 // call the packages we need
-var express    = require('express');        // call express
-var app        = express();                 // define our app using express
-var path       = require('path');
-var bodyParser = require('body-parser');
+var express         = require('express');        // call express
+var app             = express();                 // define our app using express
+var path            = require('path');
+var bodyParser      = require('body-parser');
+//var cookieParser    = require('cookie-parser');
+//var session         = require('express-session');
+var passport        = require('passport');
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+//app.use(cookieParser());
 
 var port = process.env.PORT || 8080;        // set our port
 
@@ -17,6 +21,16 @@ module.exports = app;
 app.get('/api/', function(req, res) {
     res.json({ message: 'hooray! welcome to our api!' });   
 });
+
+// initialize passport for authenticated api
+// app.use(session({
+//   secret: process.env.EXPRESS_SECRET,
+//   key: 'sid',
+//   cookie: { secure: false },
+// }));
+app.use(passport.initialize());
+//app.use(passport.session());
+
 
 var router = require('./router')(app);
 

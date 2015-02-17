@@ -8,8 +8,9 @@ var Schema = mongoose.Schema;
 var collocSchema = new Schema({
     name: { 
         type: String, 
-        required: true 
-    }
+        required: true,
+    },
+    userId: String 
 });
 
 // The primary user model
