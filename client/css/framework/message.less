@@ -1,0 +1,81 @@
+.message {
+	border-bottom: 1px solid;
+	border-top: 1px solid;
+
+	margin: .5em 0 1.5em;
+	padding: .5em 1em;
+
+	text-align: left;
+
+	&.error {
+		border-color: @errorBorderColor;
+		background-color: @errorBackgroundColor;
+		color: @errorTextColor;
+	}
+	&.success {
+		border-color: @successBorderColor;
+		background-color: @successBackgroundColor;
+		color: @successTextColor;
+	}
+	&.info {
+		border-color: @infoBorderColor;
+		background-color: @infoBackgroundColor;
+		color: @infoTextColor;
+	}
+	&.warning {
+		border-color: @warningBorderColor;
+		background-color: @warningBackgroundColor;
+		color: @warningTextColor;
+	}
+}
+
+.messages {
+	text-align: left;
+}
+
+.m-error {
+	background-color: @errorBackgroundColor;
+	color: @errorTextColor;
+}
+.m-success {
+	background-color: @successBackgroundColor;
+	color: @successTextColor;
+}
+.m-info {
+	background-color: @infoBackgroundColor;
+	color: @infoTextColor;
+}
+.m-warning {
+	background-color: @warningBackgroundColor;
+	color: @warningTextColor;
+}
+
+.text-error {
+	color: @errorTextColor;
+}
+.text-success {
+	color: @successTextColor;
+}
+.text-info {
+	color: @infoTextColor;
+}
+.text-warning {
+	color: @warningTextColor;
+}
+
+.box-error {
+	border-color: @errorBorderColor;
+	background-color: @errorBackgroundColor;
+}
+.box-success {
+	border-color: @successBorderColor;
+	background-color: @successBackgroundColor;
+}
+.box-info {
+	border-color: @infoBorderColor;
+	background-color: @infoBackgroundColor;
+}
+.box-warning {
+	border-color: @warningBorderColor;
+	background-color: @warningBackgroundColor;
+}

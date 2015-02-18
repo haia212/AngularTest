@@ -11,8 +11,6 @@ define([
   var HomeView = Backbone.View.extend({
     el: $('main'),
     render: function(){
-      console.log("render home");
-      console.log(homeTemplate);
 
           // Append our compiled template to this Views "el"
           this.$el.append( _.template( homeTemplate ));

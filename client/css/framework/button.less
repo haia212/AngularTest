@@ -1,0 +1,264 @@
+
+button[type="submit"], input[type="submit"], .btn {
+  background-image: none;
+  border: 1px solid darken(@buttonColor, 6%);
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 1.42857143;
+  padding: 6px 12px;
+  position: relative;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  &.loading:before {
+    content: "";
+    position: absolute;
+    width:0%;
+    height:3px;
+    top: -0.6px;
+    left: -1px;
+    background-color: @titleColor;
+  }
+
+  &.loading {
+    border-radius: 0;
+    .transition(border-radius 0.2s ease-in)
+  }
+
+  &.loading:before {
+    -webkit-animation: rolling-border 1.5s infinite ease-in-out,
+        left-right 3s infinite ease-in-out 0.375s, top-bottom 3s infinite ease-in-out 1.125s ;
+  }
+
+  &.loading-bg:before {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 103.4%;
+    opacity: .5;
+    top: -1.7%;
+    border-radius: 0;
+    left: -1.6%;
+    background-color: white;
+  }
+
+  &.loading-bg:before {
+    -webkit-animation: rolling-bg 1.5s infinite ease-in-out,
+        left-right 1.5s infinite ease-in-out 0.75s;
+  }
+
+}
+
+a.btn {
+  color: white;
+}
+
+button[type="submit"].default, input[type="submit"].default, .btn.default {
+  color: @buttonColor;
+  .gradient-linear(@GradientDefaultColorFrom, @GradientDefaultColorFrom);
+  border: 1px solid @borderColor;
+}
+button[type="submit"].default:hover, input[type="submit"].default:hover, .btn.default:hover {
+  .gradient-linear-breakpoint(@GradientDefaultColorFrom, 0%, @GradientDefaultColorFrom, 74%, @GradientDefaultColorTo, 100%);
+  border: 1px solid @borderColor;
+  color: @buttonColor;
+  text-decoration: none;
+}
+button[type="submit"].default:active, input[type="submit"].default:active, .btn.default:active {
+  color: @buttonColor;
+  .gradient-linear-breakpoint(@GradientDefaultColorTo, 0%, @GradientDefaultColorFrom, 74%, @GradientDefaultColorFrom, 100%);
+}
+
+
+button[type="submit"].delete, input[type="submit"].delete, .btn.delete {
+  color: @buttonErrorColor;
+  .gradient-linear(@GradientDefaultColorFrom, @GradientDefaultColorFrom);
+  border: 1px solid @buttonErrorColor;
+}
+button[type="submit"].delete:hover, input[type="submit"].delete:hover, .btn.delete:hover {
+  color: @buttonErrorColor;
+  .gradient-linear-breakpoint(@GradientDefaultColorFrom, 0%, @GradientDefaultColorFrom, 74%, @GradientDefaultColorTo, 100%);
+  text-decoration: none;
+}
+button[type="submit"].delete:active, input[type="submit"].delete:active, .btn.delete:active {
+  color: @buttonErrorColor;
+  .gradient-linear-breakpoint(@GradientDefaultColorTo, 0%, @GradientDefaultColorFrom, 74%, @GradientDefaultColorFrom, 100%);
+}
+
+button[type="submit"].default-text, input[type="submit"].default-text, .btn.default-text {
+  color: @textColor;
+  .gradient-linear(@GradientDefaultColorFrom, @GradientDefaultColorTo);
+  border: 1px solid @borderColor;
+}
+button[type="submit"].default-text:hover, input[type="submit"].default-text:hover, .btn.default-text:hover {
+  .gradient-linear(@GradientDefaultColorTo, @GradientDefaultColorTo);
+  border: 1px solid @borderColor;
+  color: @textColor;
+  text-decoration: none;
+}
+
+button[type="submit"], input[type="submit"], .btn, .btn.btn-info {
+  background-image: none;
+  background-color: @buttonColor;
+ 	color: white;
+}
+button[type="submit"]:hover, input[type="submit"]:hover, .btn:hover, .btn.btn-info:hover {
+  color: white;
+  .gradient-linear-breakpoint(@GradientColorFrom, 0%, @GradientColorFrom, 74%, @GradientColorTo, 100%);
+  text-decoration: none;
+}
+button[type="submit"]:active, input[type="submit"]:active, .btn:active, .btn.btn-info:hover {
+  color: white;
+  .gradient-linear-breakpoint(@GradientColorTo, 0%, @GradientColorFrom, 74%, @GradientColorFrom, 100%);
+  text-decoration: none;
+}
+.btn.small-btn {
+  font-size: 1.3rem;
+}
+
+.btn-group,
+.btn-group-vertical {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+}
+.btn-group > .btn,
+.btn-group-vertical > .btn {
+  position: relative;
+  float: left;
+}
+.btn-group > .btn:hover,
+.btn-group-vertical > .btn:hover,
+.btn-group > .btn:focus,
+.btn-group-vertical > .btn:focus,
+.btn-group > .btn:active,
+.btn-group-vertical > .btn:active,
+.btn-group > .btn.active,
+.btn-group-vertical > .btn.active {
+  z-index: 2;
+}
+.btn-group > .btn:focus,
+.btn-group-vertical > .btn:focus {
+  outline: 0;
+}
+.btn-group .btn + .btn,
+.btn-group .btn + .btn-group,
+.btn-group .btn-group + .btn,
+.btn-group .btn-group + .btn-group {
+  margin-left: -1px;
+}
+
+.btn-group > .btn:not(:first-child):not(:last-child):not(.dropdown-toggle) {
+  border-radius: 0;
+}
+.btn-group > .btn:first-child {
+  margin-left: 0;
+}
+.btn-group > .btn:first-child:not(:last-child):not(.dropdown-toggle) {
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+}
+.btn-group > .btn:last-child:not(:first-child),
+.btn-group > .dropdown-toggle:not(:first-child) {
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+}
+.btn-group > .btn-group {
+  float: left;
+}
+.btn-group > .btn-group:not(:first-child):not(:last-child) > .btn {
+  border-radius: 0;
+}
+.btn-group > .btn-group:first-child > .btn:last-child,
+.btn-group > .btn-group:first-child > .dropdown-toggle {
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+}
+.btn-group > .btn-group:last-child > .btn:first-child {
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+}
+.btn-group .dropdown-toggle:active,
+.btn-group.open .dropdown-toggle {
+  outline: 0;
+}
+.btn-group > .btn + .dropdown-toggle {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+.btn-group > .btn-lg + .dropdown-toggle {
+  padding-left: 12px;
+  padding-right: 12px;
+}
+.btn-group.open .dropdown-toggle {
+  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+}
+.btn-group.open .dropdown-toggle.btn-link {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.btn-linkedin span {
+  border-left: 1px solid white;
+  font-size: 1.3rem;
+  line-height: 20px;
+}
+.btn-linkedin i {
+  border-right: 1px solid white;
+}
+.btn-linkedin .btn {
+
+  background-image: linear-gradient(to bottom, #007bb6, #007bb6);
+  background-color: #007bb6;
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#007bb6), to(#007bb6));
+  background-image: -webkit-linear-gradient(top, #007bb6, #007bb6);
+  background-image: -o-linear-gradient(top, #007bb6, #007bb6);
+  background-image: -moz-linear-gradient(top, #007bb6, #007bb6);
+
+  background-color: #007bb6;
+}
+
+.btn-ico, a.btn-ico {
+  border: 1px solid @borderColor;
+  border-radius: 20px;
+  color: @textColor;
+
+  .gradient-linear(@backgroundColor, darken(@backgroundColor, 7%));
+  padding: .2em 1em .1em;
+
+  &:hover {
+    .gradient-linear(darken(@backgroundColor, 5%), darken(@backgroundColor, 7%));
+
+  }
+
+  &:active {
+    .gradient-linear(darken(@backgroundColor, 7%), @backgroundColor);
+
+  }
+}
+
+.big-btn {
+  padding: 8px 50px;
+}
+
+span.btn-disabled {
+  border-radius: 4px;
+  display: inline-block;
+  line-height: 1.42857143;
+  padding: 6px 12px;
+  position: relative;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  color: @textColor;
+  border: 1px solid @borderColor;
+  background-color: lighten(@backgroundColor, 10%);
+}
