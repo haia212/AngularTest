@@ -10,10 +10,21 @@ define([
 ], function($, _, Backbone, homeTemplate){
   var HomeView = Backbone.View.extend({
     el: $('main'),
+    constructor: function (options) {
+        this.router = options.router;
+        Backbone.View.prototype.constructor.call(this);
+    },
+    events: {
+        'submit form': 'login',
+    },
+    login: function() {
+      this.router.navigate('colloc/54e1edb4bceb39ad3efb4075', true);
+    },
     render: function(){
+      console.log(Backbone);
 
           // Append our compiled template to this Views "el"
-          this.$el.append( _.template( homeTemplate ));
+          this.$el.html( _.template( homeTemplate ));
 
     }
   });

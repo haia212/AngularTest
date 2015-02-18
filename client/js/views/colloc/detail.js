@@ -27,7 +27,7 @@ define([
           // Using Underscore we can compile our template with data
           var compiledTemplate = _.template( collocDetailTemplate, data );
           // Append our compiled template to this Views "el"
-          $bb.$el.append( compiledTemplate );
+          $bb.$el.html( compiledTemplate );
 
         }
       });
