@@ -7,8 +7,8 @@ var Schema = mongoose.Schema;
 
 // Define the User Schema
 var userSchema = new Schema({
-    email: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
+    username    : { type: String, required: true, unique: true },
+    password    : { type: String, required: true },
     profile: {} // for extra information you may / may not want
 });
 

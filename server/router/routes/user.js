@@ -4,8 +4,8 @@ var User = db.users;
 
 exports.add = function(req, res){
     var user = new User({
-        email    : req.body.email,
-        password : req.body.password
+        username    : req.body.username,
+        password    : req.body.password
     });      // create a new instance of the Bear model
     
 

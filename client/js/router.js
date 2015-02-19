@@ -3,9 +3,11 @@ define([
   'jquery',
   'underscore',
   'backbone',
+  'models/auth/sessionModel',
+
   'views/home',
   'views/colloc/detail',
-], function($, _, Backbone, HomeView, CollocDetailView){
+], function($, _, Backbone, sessionModel, HomeView, CollocDetailView){
   var AppRouter = Backbone.Router.extend({
     routes: {
       // Define some URL routes
@@ -23,6 +25,9 @@ define([
       options.url = 'http://localhost:3000/api' + options.url;
     });
 
+    var user_session = new sessionModel();
+    user_session.initialize();
+
     var app_router = new AppRouter;
 
     // 'views/colloc/:id'
@@ -34,7 +39,7 @@ define([
 
     // We have no matching route, lets just log what the URL was
     app_router.on('route:defaultAction', function(actions){
-      var homeView = new HomeView({router: app_router});
+      var homeView = new HomeView({router: app_router, session: user_session});
       homeView.render();
     });
 
